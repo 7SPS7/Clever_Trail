@@ -2,431 +2,1463 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" type="x-icon" href="logo_img.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CleverTrail</title>
-    <link rel="stylesheet" href="index.css">
+    <title>CleverTrail - Seamless Learning Platform</title>
+    <link rel="shortcut icon" type="x-icon" href="logo_img.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #4bb543;
+            --warning: #f0ad4e;
+            --danger: #d9534f;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Add this to your existing CSS */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                transition: left 0.3s ease;
+                z-index: 999;
+                display: flex !important; /* Override any other display properties */
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu a {
+                margin: 10px 0;
+                padding: 12px;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1000;
+            }
+            
+            .nav-btns {
+                display: none;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu a {
+            margin: 0 15px;
+            font-weight: 600;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-btns {
+            display: flex;
+            align-items: center;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding-right: 40px;
+        }
+        
+        .hero-content span {
+            display: inline-block;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-image img {
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Partners Section */
+        .partners {
+            padding: 50px 0;
+            background-color: var(--white);
+        }
+        
+        .partners-title {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .partner-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: var(--transition);
+            height: 60px;
+        }
+        
+        .partner-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        .partner-item img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: #f9faff;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            position: relative;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: #f9faff;
+            z-index: -1;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 5rem;
+            color: rgba(67, 97, 238, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: var(--dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Courses Section */
+        .courses {
+            background-color: #f9faff;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.1);
+        }
+        
+        .course-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .course-card:hover .course-image img {
+            transform: scale(1.05);
+        }
+        
+        .course-content {
+            padding: 25px;
+        }
+        
+        .course-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .course-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .current-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+        
+        .original-price {
+            font-size: 1rem;
+            color: var(--gray);
+            text-decoration: line-through;
+        }
+        
+        .discount-badge {
+            background-color: var(--success);
+            color: var(--white);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: auto;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--white);
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image img {
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .about-features {
+            margin-top: 30px;
+        }
+        
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .feature-check {
+            width: 24px;
+            height: 24px;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-check-input {
+            margin-right: 10px;
+        }
+        
+        .form-check-label {
+            font-size: 0.9rem;
+        }
+        
+        .form-check-label a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 0;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+        
+        .footer-newsletter p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+        }
+        
+        .newsletter-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .footer-bottom {
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-container,
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .about-image,
+            .about-content {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 0;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .nav-btns {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 120px 0 80px;
+                text-align: center;
+            }
+            
+            .hero-container {
+                flex-direction: column;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="header-section">
-        <div class="header">
-            <a href="" class="logo-icon" id="logo">
-                <div class="logo">
-                <img src="logo_img.jpg" alt="logo" class="logo-image">
-                <span class="logo-text">CleverTrail</span>
-                </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="logo_img.png" alt="CleverTrail">
+                CleverTrail
             </a>
-            <div class="nav-bar">
-                <a class="nav-items" href="#hero">Home</a>
-                <a class="nav-items" href="#card">Feature</a>
-                <a class="nav-items" href="#pricing">Pricing</a>
-                <a class="nav-items" href="#testimonial">Testimonial</a>
-                <a class="nav-items" href="#about-section">About</a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#courses">Courses</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            
+            <div class="nav-btns" id="navBtns">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary" style="margin-left: 15px;">Sign Up</a>
             </div>
-            <a href="#contact-us" class="contact-button">Contact Us</a>
-            <div class="menu-button" onclick="toggleMenu()">
-                <?xml version="1.0" encoding="UTF-8"?>
-                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" class="menu-logo"><path d="M21,15H3c-1.65,0-3-1.35-3-3s1.35-3,3-3H21c1.65,0,3,1.35,3,3s-1.35,3-3,3ZM15,6H3c-1.65,0-3-1.35-3-3S1.35,0,3,0H15c1.65,0,3,1.35,3,3s-1.35,3-3,3Zm-6,18H3c-1.65,0-3-1.35-3-3s1.35-3,3-3h6c1.65,0,3,1.35,3,3s-1.35,3-3,3Z"/></svg>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span>Very proud to introduce</span>
+                <h1>Seamless Learning for Brighter Futures</h1>
+                <p>Our innovative platform makes learning intuitive and engaging. Whether you're enhancing skills, exploring new subjects, or achieving academic goals, we provide the tools for your success.</p>
+                <div class="hero-btns">
+                    <a href="#courses" class="btn btn-primary">Start Learning</a>
+                    <a href="register.html" class="btn btn-outline">Take a Tour</a>
+                </div>
             </div>
-            <div class="overlay" id="overlay">
-                <a class="cross" onclick="toggleMenu()"><img src="cross.png" alt="close"></a>
-                <a href="#" onclick="toggleMenu()">Home</a>
-                <a href="#card" onclick="toggleMenu()">Feature</a>
-                <a href="#pricing" onclick="toggleMenu()">Pricing</a>
-                <a href="#testimonial" onclick="toggleMenu()">Testimonial</a>
-                <a href="#about-section" onclick="toggleMenu()">About</a>
-                <a href="#contact-us" onclick="toggleMenu()" id="inner_contact">Contact Us</a>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Students learning">
             </div>
         </div>
-    </div>
-    <div class="inner-body">
-        <div class="hero-section" id="hero">
-            <div class="hero-contant">
-                <div class="left-content">
-                    <span>Very proud to introduce</span>
-                    <h1>Seamless Learning for Brighter Futures</h1>
-                    <p>Our platform provides a simple and intuitive way to engage with learning, offering a smooth and seamless experience that empowers users to grow and succeed with ease. Whether you're looking to enhance your skills, explore new subjects, or achieve academic goals, our innovative tools and resources make learning both effective and enjoyable.</p>
-                    <div class="button-group">
-                        <a href="" class="startnow-button">Start now</a>
-                        <a href="" class="taketour-button">Take tour</a>
-                    </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners">
+        <div class="container">
+            <div class="partners-title">Trusted by leading organizations worldwide</div>
+            <div class="partners-grid">
+                <div class="partner-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png" alt="Microsoft">
                 </div>
-                <div class="right-contant">
-                    <img src="hero_imgs.jpg" alt="hero image" class="hero-image">
+                <div class="partner-item">
+                    <img src="Edx.jpg" alt="EdX">
                 </div>
-            </div>
-            <div class="mini-hero-section">
-                <span class="mini-hero-section-title">Trusted by the best</span>
-                <div class="mini-hero-section-content">
-                    <div class="items item1">
-                        <img src="Microsoft.svg" alt="microsoft">
-                        <span>Microsoft</span>
-                    </div>
-                    <div class="items item2">
-                        <img src="edx.png" alt="edx">
-                        <span>EdX</span>
-                    </div>
-                    <div class="items item3">
-                        <img src="VectorEdu.svg" alt="VectorEdu">
-                        <span>VectorEdu</span>
-                    </div>
-                    <div class="items item4">
-                        <img src="linkedin.svg" alt="linkedin">
-                        <span>linkedin</span>
-                    </div>
-                    <div class="items item5">
-                        <img src="coursera.png" alt="coursera">
-                        <span>Coursera</span>
-                    </div>
-                    <div class="items item6">
-                        <img src="udemy.png" alt="udemy">
-                        <span>udemy</span>
-                    </div>
-                    <div class="items item7">
-                        <img src="Google.svg" alt="Google">
-                        <span>Google</span>
-                    </div>
+                <div class="partner-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/640px-LinkedIn_logo_initials.png" alt="LinkedIn">
+                </div>
+                <div class="partner-item">
+                    <img src="coursera.png" alt="Coursera">
+                </div>
+                <div class="partner-item">
+                    <img src="udemy.png" alt="Udemy">
+                </div>
+                <div class="partner-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png" alt="Google">
                 </div>
             </div>
         </div>
-        <div class="card-section" id="card">
-            <div class="text-section">
-                <h1>Our competitive advantage</h1>
-                <p>Our platform provides a simple and intuitive way to engage with learning,  Whether you're looking to enhance your skills, explore new subjects, or achieve academic goals, our innovative tools and resources make learning both effective and enjoyable.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Competitive Advantage</h2>
+                <p>We combine innovative technology with proven educational methodologies to create a learning experience that's effective, engaging, and accessible to everyone.</p>
             </div>
-            <div class="card-grid">
-                <div class="cards card1">
-                    <div class="circle">
-                        <img src="PersonalizedLearn.svg">
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
                     </div>
-                    <h2>Personalized Learning</h2>
-                    <p>Offer tailored learning experiences through AI and machine learning to cater to individual student needs.</p>
+                    <h3>Personalized Learning</h3>
+                    <p>AI-driven recommendations tailor the learning experience to each student's needs, pace, and preferences.</p>
                 </div>
-                <div class="cards card2">
-                    <div class="circle">
-                        <img src="Analytics.svg">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <h2>Analytics and Insights</h2>
-                    <p>Offer detailed progress tracking and analytics to help students and teachers monitor performance and make data-driven decisions.</p>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Track progress with detailed analytics that help identify strengths and areas for improvement.</p>
                 </div>
-                <div class="cards card3">
-                    <div class="circle">
-                        <img src="Affordability.svg">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
                     </div>
-                    <h2>Affordability</h2>
-                    <p>Provide high-quality education at an affordable price point, making it accessible to a broader audience.</p>
+                    <h3>Affordable Pricing</h3>
+                    <p>High-quality education at a fraction of traditional costs, with flexible payment options.</p>
                 </div>
-                <div class="cards card4">
-                    <div class="circle">
-                        <img src="IndustryPatner.svg">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
                     </div>
-                    <h2>Industry Partnership</h2>
-                    <p>Collaborate with well-known companies and institutions to offer accredited courses and certifications, adding credibility to your offerings.</p>
+                    <h3>Industry Partnerships</h3>
+                    <p>Accredited courses and certifications recognized by top companies and institutions.</p>
                 </div>
-                <div class="cards card5">
-                    <div class="circle">
-                        <img src="InnovativeTech.svg">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-vr-cardboard"></i>
                     </div>
-                    <h2>Innovative Technology</h2>
-                    <p>Utilize cutting-edge technology, such as augmented reality or virtual reality, to create immersive learning experiences.</p>
+                    <h3>Immersive Tech</h3>
+                    <p>Cutting-edge VR and AR experiences that bring complex concepts to life.</p>
                 </div>
-                <div class="cards card6">
-                    <div class="circle">
-                        <img src="responsive-support.png">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
                     </div>
-                    <h2>Responsive Support</h2>
-                    <p>Provide exceptional customer support and assistance to students and educators</p>
+                    <h3>24/7 Support</h3>
+                    <p>Dedicated assistance whenever you need it, from technical help to academic guidance.</p>
                 </div>
             </div>
         </div>
-        <div class="testimonial-section" id="testimonial">
-            <div class="testimonial-title">
-                <span>What other say about us</span>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Community Says</h2>
+                <p>Hear from students, educators, and professionals who have transformed their learning journey with CleverTrail.</p>
             </div>
-            <div class="testimonial-grid">  
-                <div class="testimonial-card t_card1">
-                    <div class="testimonial-text">
-                        “Clever Trail revolutionized my classroom! Engaging content and teacher resources make learning enjoyable. Highly recommended for educators.”
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        CleverTrail has completely transformed my approach to Data Structures and Algorithms. The structured lessons, interactive quizzes, and AI-powered study analytics help me track my progress effectively. The platform makes complex topics easy to understand with real-world examples. Highly recommended for anyone serious about mastering DSA!
                     </div>
-                    <div class="testimonial-avatar">
-                        <img src="avatar1.png"/>
-                    </div>
-                    <div class="testimonial-details">
-                        <h3 class="testimonial-name"> 
-                            Sarah Johnson
-                        </h3>
-                        <p class="testimonial-desc">
-                            8th Grade English Teacher
-                        </p>
-                    </div>
-                </div>
-                <div class="testimonial-card t_card2">
-                    <div class="testimonial-text">
-                        “Thanks to Clever Trail, we’ve been able to provide personalized learning paths for all students. The platform’s intuitive interface makes it easy for both teachers and students to use.”
-                    </div>
-                    <div class="testimonial-avatar">
-                        <img src="avatar2.png"/>
-                    </div>
-                    <div class="testimonial-details">
-                        <h3 class="testimonial-name"> 
-                            Robert Clark
-                        </h3>
-                        <p class="testimonial-desc">
-                            Middle School Social Studies Teacher
-                        </p>
-                    </div>
-                </div>
-                <div class="testimonial-card t_card3">
-                    <div class="testimonial-text">
-                        “Clever Trail, a true game-changer! Flexible content, tailored assessments, and excellent support. Integral to our school district's success.”
-                    </div>
-                    <div class="testimonial-avatar">
-                        <img src="avatar3.png"/>
-                    </div>
-                    <div class="testimonial-details">
-                        <h3 class="testimonial-name"> 
-                            Jonathan Miller
-                        </h3>
-                        <p class="testimonial-desc">
-                            6th Grade Mathes Teacher
-                        </p>
-                    </div>
-                </div>
-                <div class="testimonial-card t_card4">
-                    <div class="testimonial-text">
-                        “The ease of access to resources and the depth of the content make Clever Trail an indispensable part of our district's curriculum strategy. Highly recommend!”
-                    </div>
-                    <div class="testimonial-avatar">
-                        <img src="avatar4.webp"/>
-                    </div>
-                    <div class="testimonial-details">
-                        <h3 class="testimonial-name">
-                            Emily Roberts
-                        </h3>
-                        <p class="testimonial-desc">
-                            High School Science Teacher
-                        </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Aditi singh</h4>
+                            <p>SDE, Delloite</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="testimonial-card t_card5">
-                    <div class="testimonial-text">
-                        “Our students are more motivated and excited about learning with Clever Trail. The customizable features make it easy to address individual learning needs.”
-                    </div>
-                    <div class="testimonial-avatar">
-                        <img src="avatar5.webp"/>
-                    </div>
-                    <div class="testimonial-details">
-                        <h3 class="testimonial-name">
-                            Linda Patel
-                        </h3>
-                        <p class="testimonial-desc">
-                            5th Grade Math Teacher
-                        </p>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        CleverTrail is an incredible platform for learning DSA, whether you're just starting out or refining your skills. The combination of structured tutorials, progress tracking, and interactive challenges makes it an all-in-one solution for anyone preparing for coding interviews. It’s user-friendly and super effective!                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Robert Clark">
+                        </div>
+                        <div class="author-info">
+                            <h4>Arnav Mehra</h4>
+                            <p>SDE, Microsoft</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="testimonial-card t_card6">
-                    <div class="testimonial-text">
-                        “As a principal, I’ve seen firsthand how Clever Trail empowers teachers and enhances student engagement. It’s a powerful tool for creating a dynamic learning environment.”
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        CleverTrail has completely transformed my approach to Data Structures and Algorithms. The structured lessons, interactive quizzes, and AI-powered study analytics help me track my progress effectively. The platform makes complex topics easy to understand with real-world examples. Highly recommended for anyone serious about mastering DSA!                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya Patel">
+                        </div>
+                        <div class="author-info">
+                            <h4>Priya Patel</h4>
+                            <p>Marketing Director, Google</p>
+                        </div>
                     </div>
-                    <div class="testimonial-avatar">
-                        <img src="avatar6.jpg"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="section courses" id="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Courses</h2>
+                What sets CleverTrail apart is its engaging, step-by-step approach to DSA. The practice problems are well-curated, and the AI-generated insights give a clear idea of where I need to improve. The certificate upon course completion is a great motivation booster. This platform is a must-try for coding enthusiasts!            </div>
+            
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Data Structures and Algorithms">
                     </div>
-                    <div class="testimonial-details">
-                        <h3 class="testimonial-name">
-                            Michael Thompson
-                        </h3>
-                        <p class="testimonial-desc">
-                            Elementary School Principal
-                        </p>
+                    <a href="dsa.html">
+                        <div class="course-content">
+                            <h3>Data Structures & Algorithms Mastery</h3>
+                            <div class="course-price">
+                                <span class="current-price">Free</span>
+                                <span class="original-price">₹7,000</span>
+                                <span class="discount-badge">100% OFF</span>
+                            </div>
+                            <p>Master fundamental CS concepts with hands-on coding exercises and real-world applications.</p>
+                            <div class="course-meta">
+                                <span><i class="far fa-clock"></i> 60 hours</span>
+                                <span><i class="far fa-user"></i> 4,500+ students</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="MERN Stack Development">
+                    </div>
+                    <a href="login.html">
+                        <div class="course-content">
+                            <h3>Complete MERN Stack Bootcamp</h3>
+                            <div class="course-price">
+                                <span class="current-price">₹4,999</span>
+                                <span class="original-price">₹12,000</span>
+                                <span class="discount-badge">59% OFF</span>
+                            </div>
+                            <p>Build full-stack applications with MongoDB, Express, React, and Node.js from scratch.</p>
+                            <div class="course-meta">
+                                <span><i class="far fa-clock"></i> 80 hours</span>
+                                <span><i class="far fa-user"></i> 3,200+ students</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Object-Oriented Design">
+                    </div>
+                    <a href="login.html">
+                        <div class="course-content">
+                            <h3>Object-Oriented Design Principles</h3>
+                            <div class="course-price">
+                                <span class="current-price">₹2,199</span>
+                                <span class="original-price">₹4,800</span>
+                                <span class="discount-badge">57% OFF</span>
+                            </div>
+                            <p>Learn SOLID principles, design patterns, and clean code practices for scalable applications.</p>
+                            <div class="course-meta">
+                                <span><i class="far fa-clock"></i> 45 hours</span>
+                                <span><i class="far fa-user"></i> 2,800+ students</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn btn-outline">View All Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container about-container">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="About CleverTrail">
+            </div>
+            <div class="about-content">
+                <h2>About CleverTrail</h2>
+                <p>Founded in 2020, CleverTrail began as a passion project between educators and technologists who believed learning should be accessible, engaging, and tailored to individual needs.</p>
+                <p>Today, we serve over 500,000 learners worldwide with our innovative platform that combines cutting-edge technology with pedagogical expertise.</p>
+                
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="feature-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <h4>Mission-Driven</h4>
+                            <p>Democratizing education through technology and innovation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-feature">
+                        <div class="feature-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <h4>Expert-Created Content</h4>
+                            <p>Courses designed by industry leaders and academic experts.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-feature">
+                        <div class="feature-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <h4>Proven Results</h4>
+                            <p>85% of learners report career advancement within 6 months.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <h2>Get In Touch</h2>
+                <p>Have questions about our platform or courses? Our team is here to help you find the right learning path for your goals.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Our Location</h4>
+                            <p>123 Education Street, Learning City, 560001</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>hello@clevertrail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p>+91 9876543210</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="testimonial-card t_card7">
-                    <div class="testimonial-text">
-                        “The ease of access to resources and the depth of the content make Clever Trail an indispensable part of our district's curriculum strategy. Highly recommend!”
-                    </div>
-                    <div class="testimonial-avatar">
-                        <img src="avatar7.jpeg"/>
-                    </div>
-                    <div class="testimonial-details">
-                        <h3 class="testimonial-name">
-                            David Martinez
-                        </h3>
-                        <p class="testimonial-desc">
-                            Middle School Social Studies Teacher
-                        </p>
-                    </div>
-                </div>   
-                <div class="testimonial-card t_card8">
-                    <div class="testimonial-text">
-                        “Thanks to Clever Trail, we’ve been able to provide personalized learning paths for all students. The platform’s intuitive interface makes it easy for both teachers and students to use.”
-                    </div>
-                    <div class="testimonial-avatar">
-                        <img src="avatar8.webp"/>
-                    </div>
-                    <div class="testimonial-details">
-                        <h3 class="testimonial-name">
-                            Milly Harrison
-                        </h3>
-                        <p class="testimonial-desc">
-                            High School History Teacher
-                        </p>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <div class="subscription-box" id="pricing">
-            <div class="subscription-container">
-                <div class="subscription-inner-cont">
-                    <div class="subscription-text">
-                        <h1>Choose your plan</h1>
-                        <p class="trial-info">🌱 7 days free trial</p>
-                        <p class="description">Get the right plan for your education needs. Plans can be upgraded in the future.</p>
-                    </div>
-                    <div class="toggle-buttons">
-                        <button class="toggle active" data-plan="monthly">Monthly</button>
-                        <button class="toggle" data-plan="yearly">Yearly</button>
-                    </div>
-                </div>
-                <div class="plans-container">
-                  <!-- Basic Plan -->
-                  <div class="plan basic">
-                    <h2>Basic Plan</h2>
-                    <p class="price">₹2,999 <span>/ month</span></p>
-                    <ul>
-                        <li>Access to all courses</li>
-                        <li>Up to 2 devices</li>
-                        <li>Email support</li>
-                    </ul>
-                    <button class="get-plan">Get Plan</button>
-                  </div>
-            
-                  <!-- Standard Plan -->
-                  <div class="plan standard">
-                    <h2>Standard Plan</h2>
-                    <p class="price">₹6,999 <span>/ month</span></p>
-                    <ul>
-                        <li>Access to all courses</li>
-                        <li>Up to 3 devices</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <button class="get-plan">Get Plan</button>
-                  </div>
-            
-                  <!-- Premium Plan -->
-                  <div class="plan premium">
-                    <h2>Premium Plan</h2>
-                    <p class="price">₹15,999 <span>/ month</span></p>
-                    <ul>
-                        <li>Access to all courses</li>
-                        <li>Up to 5 devices</li>
-                        <li>Dedicated mentor</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <button class="get-plan">Get Plan</button>
-                  </div>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
                 </div>
             </div>
-        </div>
-        <div id="about-section">
-            <h2 class="swaper">About CleverTrail</h2>
-            <p class="swaper">Welcome to CleverTrail, where every step of your educational journey matters. We believe learning is an adventure that transforms lives, and our mission is to make that adventure accessible, impactful, and enjoyable. CleverTrail was founded on the idea that quality education should empower, not overwhelm, and we strive to bring you a unique learning experience that blends simplicity, depth, and engagement.</p>
             
-            <h3 class="swaper">Our Mission</h3>
-            <p class="swaper">CleverTrail aims to be more than just an education platform. We are a comprehensive learning community, dedicated to empowering students, professionals, and lifelong learners. We envision a world where everyone has access to the skills and knowledge they need to reach their highest potential, whether it’s academic success, career advancement, or personal growth.</p>
-            
-            <h3 class="swaper">What We Offer</h3>
-            <p class="swaper">At CleverTrail, we offer a wide range of learning resources crafted by expert educators and industry professionals. Our courses, tutorials, and articles are designed with both beginners and advanced learners in mind, ensuring content is tailored, practical, and applicable in real-world scenarios. Our offerings include:</p>
-            <ul class="swaper">
-                <li class="swaper"><strong>In-depth Courses:</strong> Dive deep into subjects with structured courses that break down complex topics into manageable, engaging lessons.</li>
-                <li class="swaper"><strong>Skill-Building Tutorials:</strong> Enhance your skills with tutorials designed to provide hands-on experience and real-life applications.</li>
-                <li class="swaper"><strong>Expert Insights:</strong> Stay informed with articles and insights from experts in various fields, providing a well-rounded educational experience.</li>
-                <li class="swaper"><strong>Community and Support:</strong> Join a supportive community where learners collaborate, share knowledge, and encourage one another along the way.</li>
-            </ul class="swaper">
-            
-            <h3 class="swaper">Why Choose CleverTrail?</h3>
-            <p class="swaper">In an increasingly complex world, the path to learning can sometimes feel overwhelming. CleverTrail is here to make that journey easier, with resources that are straightforward, well-researched, and reliable. Our platform is user-friendly, with a focus on a seamless learning experience, so you can focus on what truly matters: building knowledge and achieving your goals.</p>
-            
-            <h3 class="swaper">Our Commitment to You</h3>
-            <p class="swaper">We’re passionate about education and dedicated to continuously enhancing our platform. At CleverTrail, we listen to our learners' needs, adapt to industry trends, and invest in the tools and technologies that create an exceptional learning experience. When you join CleverTrail, you're not just a learner; you're part of a vibrant community that values growth, curiosity, and the courage to take on new challenges.</p>
-            
-            <a class="swaper" href="" id="CTA"> <strong>Ready to start your journey?</strong> Explore CleverTrail and take the first step toward your brightest future.</a>
-        </div>
-        <div id="contact-us">
-            <div class="contact-img">
-                <img src="img.png" alt="">
-            </div>
-            <div class="contact-box">
-                <form action="">
-                    <div class="contact-text">
-                        <h1>Contact Us</h1>
-                        <p>Share your details we will contact you shortly.</p>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
                     </div>
-                    <div class="label name">
-                        <label for="name">Name</label>
-                        <input id="name" type="text">
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
                     </div>
-                    <div class="label email">
-                        <label for="email">Email</label>
-                        <input id="email" type="email">
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" placeholder="What's this about?">
                     </div>
-                    <div class="label phone-no">
-                        <label for="pno">Phone no</label>
-                        <input id="pno" type="tel">
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" placeholder="Your message here..." required></textarea>
                     </div>
-                    <div class="label message">
-                        <label for="mess">Message</label>                   <textarea name="Message" id="mess"></textarea>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="agree" class="form-check-input" required>
+                        <label for="agree" class="form-check-label">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
                     </div>
-                    <div class="tAc">
-                        <input id="agree" type="checkbox">
-                        <label id="agree-text" for="agree">Agree to our <a href="">Terms of Service</a> and <a href="">Privacy Policy</a></label>
-                    </div>
-                    <button type="button" class="submit">Submit</button>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Send Message</button>
                 </form>
             </div>
         </div>
-    </div>
-    <div class="footer-container">
-        <footer class="footer">
-            <div class="footer-top">
+    </section>
 
-                <div class="comp-logo">
-                    <a class="logo-link" href="#">
-                        <img class="logo-svg" src="logo_img.jpg"/>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="logo_img.png" alt="CleverTrail">
                         CleverTrail
-                    </a>
+                    </div>
+                    <p>Seamless Learning for Brighter Futures. Our platform empowers learners of all ages to achieve their educational goals through innovative technology and engaging content.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
                 </div>
-                <p class="filler-text">Seamless Learning for Brighter Futures.</p>
-                <div class="social">
-                        <a class="social-link" href="https://www.linkedin.com/in/shashwat-pratap-singh-ba6574254/">
-                            <img src="instagram.svg" class="social-icon" />
-                        </a>
-                        <a class="social-link" href="https://www.linkedin.com/in/shashwat-pratap-singh-ba6574254/">
-                            <img src="linkedin-copy.svg" class="social-icon" />
-                        </a>
-                        <a class="social-link" href="https://github.com/7SPS7">
-                            <img src="github.svg" class="social-icon" />
-                        </a>
-                        <a class="social-link" href="https://x.com/Shashwa9963495">
-                            <img src="twitter.svg" class="social-icon" />
-                        </a>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Courses</h3>
+                    <ul>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Data Science</a></li>
+                        <li><a href="#">Mobile App Development</a></li>
+                        <li><a href="#">Cloud Computing</a></li>
+                        <li><a href="#">Artificial Intelligence</a></li>
+                        <li><a href="#">Cybersecurity</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest course updates, learning tips, and special offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
-            <div class="footer-copyright">
-                © 2024 - Present CleverTrail. All rights reserved.
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 CleverTrail. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Shashwat Pratap Singh</p>
             </div>
-        </footer>
-        
-        <div class="footer-developer">
-            <img src="sign.jpg" alt="sign">
-            <span>Developed by Shashwat Pratap Singh</span>
-            <p>Inspired by Love Babbar(CodeHelp)</p>
         </div>
-    </div>
-    <script src="script.js"></script>
-    
+    </footer>
+
+    <script>
+        
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const navBtns = document.getElementById('navBtns');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            // Toggle between hamburger and close icon
+            if (navMenu.classList.contains('active')) {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        
+        // Header Scroll Effect
+        const header = document.querySelector('.header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        navBtns.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+    </script>
 </body>
 </html>
