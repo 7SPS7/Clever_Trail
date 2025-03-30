@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | CleverTrail</title>
+    <link rel="shortcut icon" type="x-icon" href="logo_img.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f5f7ff;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        .login-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+        
+        .login-left {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-left::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .login-left::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -30px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .login-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            z-index: 1;
+        }
+        
+        .login-logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .login-left h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+        
+        .login-left p {
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            z-index: 1;
+        }
+        
+        .login-features {
+            text-align: left;
+            max-width: 500px;
+            margin-bottom: 40px;
+            z-index: 1;
+        }
+        
+        .login-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .login-feature-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .login-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background-color: var(--white);
+        }
+        
+        .login-form-container {
+            max-width: 450px;
+            width: 100%;
+        }
+        
+        .login-form-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .login-form-header h2 {
+            font-size: 2rem;
+            color: var(--dark);
+        }
+        
+        .login-form-header p {
+            color: var(--gray);
+        }
+        
+        .login-form {
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .password-input {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            cursor: pointer;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--gray);
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        .divider-text {
+            padding: 0 15px;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--light-gray);
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .social-btn:hover {
+            background-color: var(--light);
+            transform: translateY(-2px);
+        }
+        
+        .social-btn.google {
+            color: #db4437;
+        }
+        
+        .social-btn.facebook {
+            color: #4267b2;
+        }
+        
+        .error-message {
+            color: #d9534f;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success-message {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .btn-loading .btn-text {
+            display: none;
+        }
+        
+        .btn-loading .spinner {
+            display: inline-block;
+        }
+        
+        .spinner {
+            display: none;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 992px) {
+            .login-left {
+                padding: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+            
+            .login-left {
+                padding: 40px 20px;
+                text-align: center;
+            }
+            
+            .login-features {
+                text-align: center;
+            }
+            
+            .login-feature {
+                justify-content: center;
+            }
+            
+            .login-right {
+                padding: 40px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .login-logo {
+                font-size: 1.5rem;
+            }
+            
+            .login-logo img {
+                height: 40px;
+            }
+            
+            .login-left h2 {
+                font-size: 1.8rem;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Left Side - Branding and Info -->
+        <div class="login-left">
+            <a href="index.html">
+                <div class="login-logo">
+                    <img src="logo_img.png" alt="CleverTrail">
+                    CleverTrail
+                </div>
+            </a>
+            
+            <h2>Welcome Back!</h2>
+            <p>Continue your learning journey with CleverTrail. Access your personalized dashboard, courses, and progress tracking.</p>
+            
+            <div class="login-features">
+                <div class="login-feature">
+                    <div class="login-feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h4>Personalized Learning</h4>
+                        <p>Pick up right where you left off with your customized learning path.</p>
+                    </div>
+                </div>
+                
+                <div class="login-feature">
+                    <div class="login-feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h4>Track Your Progress</h4>
+                        <p>Monitor your achievements and see how far you've come.</p>
+                    </div>
+                </div>
+                
+                <div class="login-feature">
+                    <div class="login-feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div>
+                        <h4>Access Certificates</h4>
+                        <p>Download your completed course certificates anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Side - Login Form -->
+        <div class="login-right">
+            <div class="login-form-container">
+                <div class="login-form-header">
+                    <h2>Login to Your Account</h2>
+                    <p>Enter your credentials to access your dashboard</p>
+                </div>
+                
+                <div id="error-message" class="error-message"></div>
+                <div id="success-message" class="success-message"></div>
+                
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-input">
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                            <i class="far fa-eye password-toggle" id="togglePassword"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="#" id="forgotPassword" class="forgot-password">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary login-btn" id="loginButton">
+                        <span class="btn-text">Login</span>
+                        <span class="spinner"><i class="fas fa-spinner"></i></span>
+                    </button>
+                    
+                    <div class="divider">
+                        <span class="divider-text">or continue with</span>
+                    </div>
+                    
+                    <div class="social-login">
+                        <a href="#" class="social-btn google" id="googleLogin">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-btn facebook" id="facebookLogin">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="register-link">
+                        Don't have an account? <a href="register.html">Sign up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword,
+            signInWithPopup,
+            GoogleAuthProvider,
+            FacebookAuthProvider,
+            sendPasswordResetEmail,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfu9Owp0RxqI8MtWXBV7yK6Jqsf2cmLtQ",
+            authDomain: "clevertrail-auth.firebaseapp.com",
+            projectId: "clevertrail-auth",
+            storageBucket: "clevertrail-auth.appspot.com",
+            messagingSenderId: "268153823937",
+            appId: "1:268153823937:web:afe8eab675a57b3fee6a40",
+            measurementId: "G-C7WM4MZNGN"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const analytics = getAnalytics(app);
+        const googleProvider = new GoogleAuthProvider();
+        const facebookProvider = new FacebookAuthProvider();
+
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const forgotPasswordLink = document.getElementById('forgotPassword');
+        const googleLoginBtn = document.getElementById('googleLogin');
+        const facebookLoginBtn = document.getElementById('facebookLogin');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+        const loginButton = document.getElementById('loginButton');
+
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Handle form submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            
+            // Show loading state
+            loginButton.classList.add('btn-loading');
+            
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                // Login successful
+                console.log("User logged in:", userCredential.user);
+                window.location.href = "dashboard.html";
+            } catch (error) {
+                console.error("Login error:", error);
+                showError(getErrorMessage(error.code));
+                loginButton.classList.remove('btn-loading');
+            }
+        });
+
+        // Handle forgot password
+        forgotPasswordLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const email = emailInput.value;
+            
+            if (!email) {
+                showError("Please enter your email address first");
+                return;
+            }
+            
+            try {
+                await sendPasswordResetEmail(auth, email);
+                showSuccess(`Password reset email sent to ${email}`);
+            } catch (error) {
+                console.error("Password reset error:", error);
+                showError(getErrorMessage(error.code));
+            }
+        });
+
+        // Handle Google login
+        googleLoginBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                console.log("Google login success:", result.user);
+                window.location.href = "dashboard.html";
+            } catch (error) {
+                console.error("Google login error:", error);
+                showError(getErrorMessage(error.code));
+            }
+        });
+
+        // Handle Facebook login
+        facebookLoginBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                const result = await signInWithPopup(auth, facebookProvider);
+                console.log("Facebook login success:", result.user);
+                window.location.href = "dashboard.html";
+            } catch (error) {
+                console.error("Facebook login error:", error);
+                showError(getErrorMessage(error.code));
+            }
+        });
+
+        // Check if user is already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = "dashboard.html";
+            }
+        });
+
+        // Helper functions
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        function getErrorMessage(errorCode) {
+            const errorMessages = {
+                'auth/invalid-email': 'Invalid email address',
+                'auth/user-disabled': 'This account has been disabled',
+                'auth/user-not-found': 'No account found with this email',
+                'auth/wrong-password': 'Incorrect password',
+                'auth/too-many-requests': 'Too many attempts. Please try again later',
+                'auth/network-request-failed': 'Network error. Please check your connection',
+                'auth/popup-closed-by-user': 'Login popup was closed',
+                'auth/account-exists-with-different-credential': 'An account already exists with this email'
+            };
+            return errorMessages[errorCode] || 'An error occurred. Please try again.';
+        }
+    </script>
+</body>
+</html>
